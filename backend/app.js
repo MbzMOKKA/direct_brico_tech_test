@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 const app = express();
 dotenv.config();
 
-const userRoutes = require('./routes/user');
-const sauceRoutes = require('./routes/sauce');
+const userRoutes = require('./compiled/routes/user');
+const pizzaRoutes = require('./compiled/routes/pizza');
 
 //Access to the API from any origin
 app.use((_req, _res, _next) => {
@@ -21,7 +21,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/auth', userRoutes);
-app.use('/api/sauces', sauceRoutes);
+app.use('/api/pizza', pizzaRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Exports

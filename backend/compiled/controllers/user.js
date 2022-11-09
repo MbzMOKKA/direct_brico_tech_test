@@ -1,24 +1,17 @@
-//Imports
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
+import * as dotenv from 'dotenv';
 dotenv.config();
-
-const User = require('../models/user');
-const errorFunctions = require('../utils/responses/errors');
-const successFunctions = require('../utils/successes');
-
 //Exports
-exports.signUp = (request, response, next) => {
+/*
+exports.register = (request, response, next) => {
     //Hashing the password of the new user
     bcrypt
         .hash(request.body.password, 11)
         .then((hash) => {
             //Hashed password created, creating the user
-            const user = new User({
+            const user = {
                 email: request.body.email,
                 password: hash,
-            });
+            };
             //Saving the new user to the data base
             user.save()
                 //User created
@@ -62,3 +55,4 @@ exports.logIn = (request, response, next) => {
         //Server error
         .catch((error) => errorFunctions.sendServerError(response, error));
 };
+*/
