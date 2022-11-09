@@ -1,6 +1,11 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.logIn = exports.register = void 0;
 //Exports
+const register = (request, response, next) => { };
+exports.register = register;
+const logIn = (request, response, next) => { };
+exports.logIn = logIn;
 /*
 exports.register = (request, response, next) => {
     //Hashing the password of the new user

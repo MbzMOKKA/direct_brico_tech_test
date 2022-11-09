@@ -1,8 +1,8 @@
 //Imports
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
-dotenv.config();
+//import * as dotenv from 'dotenv';
+//dotenv.config();
 
 import * as errorFunctions from '../utils/responses/errors';
 import * as successFunctions from '../utils/responses/successes';

@@ -1,6 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 //Imports
-import * as jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 dotenv.config();
 //Exports
 module.exports = (request, response, next) => {

@@ -1,5 +1,18 @@
-export {};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deletePizza = exports.modifyPizza = exports.uploadPizza = exports.getAllPizzas = void 0;
+const successFunctions = require("../utils/responses/successes");
 //Exports
+const getAllPizzas = (request, response, next) => {
+    successFunctions.sendGenericSuccess(response);
+};
+exports.getAllPizzas = getAllPizzas;
+const uploadPizza = (request, response, next) => { };
+exports.uploadPizza = uploadPizza;
+const modifyPizza = (request, response, next) => { };
+exports.modifyPizza = modifyPizza;
+const deletePizza = (request, response, next) => { };
+exports.deletePizza = deletePizza;
 /*
 exports.getAllSauces = (request, response, next) => {
     //Getting informations about all of the sauces

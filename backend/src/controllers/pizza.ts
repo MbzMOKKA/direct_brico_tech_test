@@ -1,11 +1,12 @@
 //Imports
 import * as fileSystem from 'fs';
-
 import * as errorFunctions from '../utils/responses/errors';
 import * as successFunctions from '../utils/responses/successes';
 
 //Exports
-export const getAllPizzas = (request, response, next) => {};
+export const getAllPizzas = (request, response, next) => {
+    successFunctions.sendGenericSuccess(response);
+};
 export const uploadPizza = (request, response, next) => {};
 export const modifyPizza = (request, response, next) => {};
 export const deletePizza = (request, response, next) => {};
