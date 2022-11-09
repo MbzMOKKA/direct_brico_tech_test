@@ -16,5 +16,5 @@ exports.sendUnauthorizeError = (response) => {
 };
 //Response that is sent if email or password is not correct
 exports.sendLogInError = (response) => {
-    response.status(401).json({ message : "Email or password invalid" });
-}
+    response.status(401).json({ message: 'Email or password invalid' });
+};
