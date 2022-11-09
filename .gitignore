@@ -1,0 +1,16 @@
+#ROOT
+
+todo.txt
+.prettierrc
+.prettierignore
+
+#BACKEND
+
+backend/node_modules
+backend/images/*
+backend/.env
+
+#FRONTEND
+
+frontend/node_modules
+frontend/build
