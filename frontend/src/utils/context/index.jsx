@@ -5,7 +5,7 @@ import React, { useState, createContext } from 'react';
 export const SessionContext = createContext();
 
 export const SessionProvider = ({ children }) => {
-    const [token, setToken] = useState(0);
+    const [token, setToken] = useState('null');
 
     return <SessionContext.Provider value={{ token, setToken }}>{children}</SessionContext.Provider>;
 };

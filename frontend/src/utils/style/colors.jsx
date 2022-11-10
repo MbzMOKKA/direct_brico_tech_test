@@ -1,5 +1,9 @@
 const colors = {
-    primary: '#9272FB',
+    primary: '#E33C3C',
+    secondary: '#FEC510',
+    tertiary: '#970303',
+    backgroundDarker: '#EEEEEE',
+    backgroundDarkest: '#AAAAAA',
 };
 
 //Exports

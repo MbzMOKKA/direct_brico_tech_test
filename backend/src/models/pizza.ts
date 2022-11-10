@@ -7,7 +7,7 @@ interface Pizza {
     ingredients: string;
 }
 
-let products: Pizza[] = [
+export let products: Pizza[] = [
     {
         id: '54e4hy58de5z8x5g1z87a98c2hj2y',
         uploaderId: 's8g1y8n5r1x8b9y1e5zs6v2g',

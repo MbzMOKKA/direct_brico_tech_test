@@ -1,9 +1,9 @@
 interface User {
-    id: string;
+    id: number;
     email: string;
     password: string;
     name: string;
     surname: string;
 }
 
-let users: User[] = [];
+export let users: User[] = [];

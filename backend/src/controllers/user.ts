@@ -1,15 +1,54 @@
 //Imports
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-//import * as dotenv from 'dotenv';
-//dotenv.config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import * as errorFunctions from '../utils/responses/errors';
 import * as successFunctions from '../utils/responses/successes';
+import * as checkUser from '../utils/checks/user';
+import * as misc from '../utils/misc';
+import { users } from '../models/user';
 
 //Exports
-export const register = (request, response, next) => {};
-export const logIn = (request, response, next) => {};
+export const register = (request, response, next) => {
+    try {
+        if (!checkUser.emailIsUnique(request.body.email)) {
+            throw `Cette email est déjà utilisé`;
+        }
+        if (!checkUser.registerFieldsAreValid(request.body.email, request.body.password, request.body.name, request.body.surname)) {
+            throw `L'email, mot de passe, prénom ou nom n'est pas dans le bon format`;
+        }
+        //Hashing the password of the new user
+        bcrypt
+            .hash(request.body.password, 11)
+            .then((hash) => {
+                //Hashed password created, creating the user
+                const user = {
+                    id: users.length,
+                    email: request.body.email,
+                    password: hash,
+                    name: request.body.name,
+                    surname: request.body.surname,
+                };
+                //Saving the new user to the data base
+                if (misc.addToDatabase(user, users)) {
+                    //User created
+                    successFunctions.sendAccountCreationSuccess(response);
+                }
+            })
+            //Hashing failed
+            .catch(() => errorFunctions.sendServerError(response));
+    } catch (error) {
+        //Creation failed
+        errorFunctions.sendServerError(response, error);
+    }
+};
+export const logIn = (request, response, next) => {
+    console.log('----------------');
+    console.log('TRYING TO LOGIN...');
+    console.log(request.body);
+};
 /*
 exports.register = (request, response, next) => {
     //Hashing the password of the new user
