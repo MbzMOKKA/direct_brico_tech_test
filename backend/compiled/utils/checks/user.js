@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerFieldsAreValid = exports.emailIsUnique = void 0;
+//Imports
 const user_1 = require("../../models/user");
 //Exports
 const emailIsUnique = (email) => {
@@ -18,8 +19,8 @@ const registerFieldsAreValid = (email, password, name, surname) => {
     if (typeof email != 'string' || email.length < 1 || email.match(regexEmail) == null) {
         return false;
     }
-    //Password must be a string, 8+ caracters long, contains a number, a symbol, a uppercase caracter and a lowercase caracter
-    const regexPassword = /@/; //<<<<<<<<<<<<<<<<<<<<<<TODO
+    //Password must be a string, 8+ characters long, contains a number, a symbol, an uppercase character and a lowercase character
+    const regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*.,?])/;
     if (typeof password != 'string' || password.length < 9 || password.match(regexPassword) == null) {
         return false;
     }

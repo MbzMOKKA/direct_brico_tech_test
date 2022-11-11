@@ -1,12 +1,12 @@
 //Imports
-import { StyledHeader, StyledAppName } from './style';
+import { StyledHeader } from './style';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SessionContext } from '../../utils/context';
 
 //Component
 function Header() {
-    const { token, setToken } = useContext(SessionContext);
+    const { token } = useContext(SessionContext);
     const redirect = useNavigate();
 
     //Redirect to register page if not logged-in
@@ -20,10 +20,10 @@ function Header() {
     //Render
     return (
         <StyledHeader>
-            <StyledAppName>
+            <h1>
                 <i className="fa-solid fa-pizza-slice" />
                 Pizzaz
-            </StyledAppName>
+            </h1>
             {token}
         </StyledHeader>
     );

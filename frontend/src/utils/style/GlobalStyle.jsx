@@ -15,9 +15,22 @@ const StyledGlobalStyle = createGlobalStyle`
     main{
         padding-top: 28px;
     }
+    h1{
+        font-family: 'Dancing Script', cursive;
+        font-size: 44px;
+        font-weight: 900;
+        color: ${colors.primary};
+        text-shadow: 1px 1px 20px ${colors.secondary};
+        i {
+            font-size: 38px;
+            margin-right: 8px;
+            text-shadow: 1px 1px 20px ${colors.secondary};
+        }
+    }
     h2{
+        font-family: 'Dancing Script', cursive;
         color: ${colors.tertiary};
-        font-size: 22px;
+        font-size: 32px;
         font-weight: bold;
         line-height: 1;
         padding-left: 12px;

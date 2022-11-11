@@ -1,5 +1,4 @@
 //Imports
-import { match } from 'assert';
 import { users } from '../../models/user';
 
 //Exports
@@ -17,8 +16,8 @@ export const registerFieldsAreValid = (email, password, name, surname) => {
     if (typeof email != 'string' || email.length < 1 || email.match(regexEmail) == null) {
         return false;
     }
-    //Password must be a string, 8+ caracters long, contains a number, a symbol, a uppercase caracter and a lowercase caracter
-    const regexPassword = /@/; //<<<<<<<<<<<<<<<<<<<<<<TODO
+    //Password must be a string, 8+ characters long, contains a number, a symbol, an uppercase character and a lowercase character
+    const regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*.,?])/;
     if (typeof password != 'string' || password.length < 9 || password.match(regexPassword) == null) {
         return false;
     }
