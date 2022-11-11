@@ -53,8 +53,12 @@ const StyledGlobalStyle = createGlobalStyle`
         }
     }
     label{
-        font-style: italic;
         margin-bottom: 4px;
+        em{
+            color:gray;
+            font-style: italic;
+            font-size: 15px;
+        }
     }
     input {
         margin-bottom: 20px;

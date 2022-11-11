@@ -1,18 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerFieldsAreValid = exports.emailIsUnique = void 0;
+exports.registerFieldsAreValid = exports.onDBfromEmail = void 0;
 //Imports
 const user_1 = require("../../models/user");
 //Exports
-const emailIsUnique = (email) => {
-    for (let user of user_1.users) {
-        if (user.email == email) {
-            return false;
-        }
-    }
-    return true;
+const onDBfromEmail = (email) => {
+    return user_1.users.find((user) => user.email == email);
 };
-exports.emailIsUnique = emailIsUnique;
+exports.onDBfromEmail = onDBfromEmail;
 const registerFieldsAreValid = (email, password, name, surname) => {
     //Email must be a non empty string and contain a @
     const regexEmail = /@/;

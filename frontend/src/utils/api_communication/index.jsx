@@ -43,11 +43,10 @@ export async function submitRegister(token, setToken, email, password, name, sur
         });
         if (result.status === 201) {
             //account creation success
-            alert('COMPTE CREER');
-            submitLogIn(token, setToken, { email, password });
+            submitLogIn(token, setToken, email, password);
         }
     } catch (error) {
-        console.log(error);
+        alert(error.response.data.message);
     }
 }
 
@@ -59,6 +58,6 @@ export async function submitLogIn(token, setToken, email, password) {
         });
         setToken(result.data.token);
     } catch (error) {
-        console.log(error);
+        alert(error.response.data.message);
     }
 }

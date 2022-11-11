@@ -2,14 +2,10 @@
 import { users } from '../../models/user';
 
 //Exports
-export const emailIsUnique = (email) => {
-    for (let user of users) {
-        if (user.email == email) {
-            return false;
-        }
-    }
-    return true;
+export const onDBfromEmail = (email) => {
+    return users.find((user) => user.email == email);
 };
+
 export const registerFieldsAreValid = (email, password, name, surname) => {
     //Email must be a non empty string and contain a @
     const regexEmail = /@/;

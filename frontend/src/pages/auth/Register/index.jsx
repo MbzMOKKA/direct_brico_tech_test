@@ -20,9 +20,13 @@ function Register() {
                 Pas encore membre ?<br />
                 Créez un compte !
             </h2>
-            <label htmlFor="input-email">Adresse email</label>
+            <label htmlFor="input-email">
+                Adresse email <em>(doit contenir @)</em>
+            </label>
             <input id="input-email" type="email" ref={refEmail}></input>
-            <label htmlFor="input-password">Mot de passe</label>
+            <label htmlFor="input-password">
+                Mot de passe <em>(8 caractères dont 1 nombre, 1 symbole, 1 minuscule et 1 majuscule)</em>
+            </label>
             <input id="input-password" type="password" ref={refPassword}></input>
             <label htmlFor="input-name">Prénom</label>
             <input id="input-name" type="text" ref={refName}></input>
