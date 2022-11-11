@@ -2,10 +2,11 @@
 import * as fileSystem from 'fs';
 import * as errorFunctions from '../utils/responses/errors';
 import * as successFunctions from '../utils/responses/successes';
+import { pizzas } from '../models/pizza';
 
 //Exports
 export const getAllPizzas = (request, response, next) => {
-    successFunctions.sendGenericSuccess(response);
+    response.status(200).json(pizzas);
 };
 export const uploadPizza = (request, response, next) => {};
 export const modifyPizza = (request, response, next) => {};

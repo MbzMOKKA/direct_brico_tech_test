@@ -3,7 +3,7 @@
 //Component
 function ErrorNotFound() {
     //Render
-    return <>ErrorNotFound</>;
+    return <>Page not found</>;
 }
 
 //Exports

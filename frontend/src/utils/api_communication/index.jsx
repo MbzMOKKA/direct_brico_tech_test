@@ -61,3 +61,12 @@ export async function submitLogIn(token, setToken, email, password) {
         alert(error.response.data.message);
     }
 }
+
+export async function getAllPizzas(token, setPizzas) {
+    try {
+        const result = await communicateWithAPI('http://localhost:8000/api/pizza', 'GET', token, null);
+        setPizzas(result.data);
+    } catch (error) {
+        alert(error.response.data.message);
+    }
+}

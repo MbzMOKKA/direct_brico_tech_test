@@ -6,13 +6,15 @@ import { SessionContext } from '../../utils/context';
 
 //Component
 function Header() {
-    const { token } = useContext(SessionContext);
+    const { token, setToken } = useContext(SessionContext);
     const redirect = useNavigate();
 
     //Redirect to register page if not logged-in
     useEffect(() => {
         if (token === 'null') {
-            redirect('/register', { replace: true });
+            redirect('/login', { replace: true });
+        } else {
+            redirect('/', { replace: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
@@ -24,7 +26,15 @@ function Header() {
                 <i className="fa-solid fa-pizza-slice" />
                 Pizzaz
             </h1>
-            {token}
+            {token !== 'null' ? (
+                <button
+                    onClick={() => {
+                        setToken('null');
+                    }}
+                >
+                    Se déconnecter
+                </button>
+            ) : null}
         </StyledHeader>
     );
 }

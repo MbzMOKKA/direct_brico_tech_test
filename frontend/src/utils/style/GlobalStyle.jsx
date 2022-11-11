@@ -37,6 +37,13 @@ const StyledGlobalStyle = createGlobalStyle`
         padding-right: 12px;
         margin-bottom: 24px;
     }
+    h3{
+        font-family: 'Dancing Script', cursive;
+        font-size: 26px;
+        font-weight: bold;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
     a{
         color: ${colors.secondary};
     }
@@ -65,6 +72,16 @@ const StyledGlobalStyle = createGlobalStyle`
         border: none;
         border-radius: 10px;
         padding: 6px;
+    }
+    .price{
+        position: absolute;
+        top: 6px;
+        right:6px;
+        font-weight: bold;
+    }
+    .ingredients{
+        font-style:italic;
+        font-size: 16px;
     }
 `;
 

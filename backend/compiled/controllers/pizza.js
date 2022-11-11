@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletePizza = exports.modifyPizza = exports.uploadPizza = exports.getAllPizzas = void 0;
-const successFunctions = require("../utils/responses/successes");
+const pizza_1 = require("../models/pizza");
 //Exports
 const getAllPizzas = (request, response, next) => {
-    successFunctions.sendGenericSuccess(response);
+    response.status(200).json(pizza_1.pizzas);
 };
 exports.getAllPizzas = getAllPizzas;
 const uploadPizza = (request, response, next) => { };
