@@ -6,5 +6,4 @@ export interface Response {
 
 export const addToDatabase = (element, dbArray) => {
     dbArray.push(element);
-    return true;
 };

@@ -1,37 +1,49 @@
 //Imports
-import * as fileSystem from 'fs';
 import * as errorFunctions from '../utils/responses/errors';
 import * as successFunctions from '../utils/responses/successes';
+import * as checkUser from '../utils/checks/user';
+import * as checkPizza from '../utils/checks/pizza';
+import * as misc from '../utils/misc';
 import { pizzas } from '../models/pizza';
 
 //Exports
 export const getAllPizzas = (request, response, next) => {
     response.status(200).json(pizzas);
 };
-export const uploadPizza = (request, response, next) => {};
+export const uploadPizza = (request, response, next) => {
+    try {
+        //Checking if the user behind the request exists
+        const userOnDB = checkUser.onDBfromEmail(request.auth.userEmail);
+        if (userOnDB === undefined) {
+            throw "Jeton d'authentification incorrect";
+        }
+        //Checking if the pizza infos are in the right format
+        const pizzaName = request.body.name;
+        const pizzaImageURL = request.body.imageURL;
+        const pizzaPrice = request.body.price;
+        const pizzIngredients = request.body.ingredients;
+        if (!checkPizza.pizzaFieldsAreValid(pizzaName, pizzaImageURL, pizzaPrice, pizzIngredients)) {
+            throw "L'un des champs saisie est incorrect";
+        }
+        //Creating the uploaded pizza
+        const pizza = {
+            id: pizzas.length,
+            uploaderEmail: request.auth.userEmail,
+            name: pizzaName,
+            price: Math.round(pizzaPrice * 100),
+            imageURL: pizzaImageURL === '' ? 'null' : pizzaImageURL,
+            ingredients: pizzIngredients,
+        };
+        //Saving the new pizza to the data base
+        misc.addToDatabase(pizza, pizzas);
+        response.status(200).json(pizza);
+    } catch (error) {
+        errorFunctions.sendServerError(response, error);
+    }
+};
 export const modifyPizza = (request, response, next) => {};
 export const deletePizza = (request, response, next) => {};
 /*
-exports.getAllSauces = (request, response, next) => {
-    //Getting informations about all of the sauces
-    Sauce.find()
-        .then((sauceList) => response.status(200).json(sauceList))
-        .catch((error) => errorFunctions.sendServerError(response, error));
-};
-
-exports.getOneSauce = (request, response, next) => {
-    //Getting informations about the specified sauce
-    Sauce.findOne({ _id: request.params.id })
-        .then((sauceAsked) => {
-            if (sauceAsked === null) {
-                //Sauce provided does not exists : bad request
-                errorFunctions.sendNotFoundError(response, "Can't find something that does not exists");
-            } else {
-                response.status(200).json(sauceAsked);
-            }
-        })
-        .catch((error) => errorFunctions.sendServerError(response, error));
-};
 
 exports.uploadSauce = (request, response, next) => {
     //Building the sauce to upload to the data base
@@ -125,81 +137,6 @@ exports.deleteSauce = (request, response, next) => {
                             .then(() => successFunctions.sendDeleteSuccess(response))
                             .catch((error) => errorFunctions.sendServerError(response, error));
                     });
-                }
-            }
-        })
-        .catch((error) => errorFunctions.sendServerError(response, error));
-};
-
-exports.likeSauce = (request, response, next) => {
-    const sauceId = request.params.id;
-    //Verifying that the sauce exists
-    Sauce.findOne({ _id: sauceId })
-        .then((sauceObject) => {
-            if (sauceObject === null) {
-                //Sauce provided does not exists : bad request
-                errorFunctions.sendNotFoundError(response, "Can't like/dislike something that does not exists");
-            } else {
-                const userConfirmedId = request.auth.userId;
-                let actionDone = false;
-                switch (request.body.like) {
-                    case -1:
-                        //Disliking
-                        if (sauceObject.usersDisliked.includes(userConfirmedId) === false) {
-                            //Not disliked yet : okay
-                            sauceObject.usersDisliked.push(userConfirmedId);
-                            sauceObject.dislikes++;
-                            const userIdIndexLike = sauceObject.usersLiked.indexOf(userConfirmedId);
-                            if (userIdIndexLike != -1) {
-                                //Cancel the user like
-                                sauceObject.usersLiked.splice(userIdIndexLike);
-                                sauceObject.likes--;
-                            }
-                            actionDone = true;
-                        }
-                        break;
-                    case 0:
-                        //Cancelling
-                        const userIdIndexLike = sauceObject.usersLiked.indexOf(userConfirmedId);
-                        if (userIdIndexLike != -1) {
-                            //Cancel the user like
-                            sauceObject.usersLiked.splice(userIdIndexLike);
-                            sauceObject.likes--;
-                            actionDone = true;
-                        } else {
-                            const userIdIndexDislike = sauceObject.usersDisliked.indexOf(userConfirmedId);
-                            if (userIdIndexDislike != -1) {
-                                //Cancel the user dislike
-                                sauceObject.usersDisliked.splice(userIdIndexDislike);
-                                sauceObject.dislikes--;
-                                actionDone = true;
-                            }
-                        }
-                        break;
-                    case 1:
-                        //Liking
-                        if (sauceObject.usersLiked.includes(userConfirmedId) === false) {
-                            //Not liked yet : okay
-                            sauceObject.usersLiked.push(userConfirmedId);
-                            sauceObject.likes++;
-                            const userIdIndexDislike = sauceObject.usersDisliked.indexOf(userConfirmedId);
-                            if (userIdIndexDislike != -1) {
-                                //Cancel the user dislike
-                                sauceObject.usersDisliked.splice(userIdIndexDislike);
-                                sauceObject.dislikes--;
-                            }
-                            actionDone = true;
-                        }
-                        break;
-                }
-                if (actionDone == true) {
-                    //Updating the likes/dislikes on the data base
-                    Sauce.updateOne({ _id: sauceId }, sauceObject)
-                        .then(() => successFunctions.sendLikeSuccess(response))
-                        .catch((error) => errorFunctions.sendServerError(response, error));
-                } else {
-                    //Bad request
-                    errorFunctions.sendBadRequestError(response, "Can't do that");
                 }
             }
         })

@@ -5,15 +5,17 @@ import styled from 'styled-components';
 export const StyledHome = styled.div`
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 60%;
     margin: auto;
-    margin-bottom: 40px;
     h2 {
         text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
     }
 `;
 
 export const StyledList = styled.ul`
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

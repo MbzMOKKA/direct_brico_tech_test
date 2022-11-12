@@ -19,14 +19,14 @@ export const StyledCard = styled.li`
         }
     }
     @media (min-width: 900px) {
-        width: 45%;
+        width: 40%;
     }
 `;
 
 export const StyledImage = styled.div`
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 260px;
     overflow: hidden;
     img {
         transition-duration: 500ms;
@@ -42,6 +42,7 @@ export const StyledImage = styled.div`
 
 export const StyledInfos = styled.div`
     position: relative;
+    width: 100%;
     padding: 12px;
     padding-top: 6px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);

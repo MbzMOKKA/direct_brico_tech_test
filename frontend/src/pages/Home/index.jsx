@@ -4,6 +4,7 @@ import { StyledHome, StyledList } from './style';
 import { getAllPizzas } from '../../utils/api_communication/index';
 import { SessionContext } from '../../utils/context/index';
 import PizzaCard from '../../components/PizzaCard/index';
+import PizzaUploader from '../../components/PizzaUploader/index';
 
 //Component
 function Home() {
@@ -24,6 +25,8 @@ function Home() {
                     return <PizzaCard key={pizza.id} pizza={pizza} />;
                 })}
             </StyledList>
+            <h2>Ajouter une pizza</h2>
+            <PizzaUploader token={token} setPizzas={setPizzas} />
         </StyledHome>
     );
 }

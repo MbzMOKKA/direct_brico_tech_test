@@ -14,6 +14,7 @@ const StyledGlobalStyle = createGlobalStyle`
     }
     main{
         padding-top: 28px;
+        margin-bottom: 64px;
     }
     h1{
         font-family: 'Dancing Script', cursive;
@@ -62,26 +63,33 @@ const StyledGlobalStyle = createGlobalStyle`
     label{
         margin-bottom: 4px;
         em{
-            color:gray;
+            color: gray;
             font-style: italic;
             font-size: 15px;
         }
     }
-    input {
+    input, textarea {
+        width: 100%;
         margin-bottom: 20px;
         border: none;
         border-radius: 10px;
         padding: 6px;
     }
+    textarea {
+        resize: none;
+    }
     .price{
         position: absolute;
         top: 6px;
-        right:6px;
+        right: 6px;
         font-weight: bold;
     }
     .ingredients{
         font-style:italic;
         font-size: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
     }
 `;
 

@@ -32,10 +32,8 @@ export const register = (request, response, next) => {
                     surname: request.body.surname,
                 };
                 //Saving the new user to the data base
-                if (misc.addToDatabase(user, users)) {
-                    //User created
-                    successFunctions.sendAccountCreationSuccess(response);
-                }
+                misc.addToDatabase(user, users);
+                successFunctions.sendAccountCreationSuccess(response);
             })
             //Hashing failed
             .catch(() => errorFunctions.sendServerError(response));
@@ -47,10 +45,7 @@ export const register = (request, response, next) => {
 export const logIn = (request, response, next) => {
     try {
         //Looking if the user exists
-        console.log(request.body.email);
         const userOnDB = checkUser.onDBfromEmail(request.body.email);
-
-        console.log(userOnDB);
         if (userOnDB === undefined) {
             throw `Email ou mot de passe incorrect`;
         }
@@ -64,8 +59,7 @@ export const logIn = (request, response, next) => {
                 } else {
                     //Everything is okay, the user is logged in
                     response.status(200).json({
-                        userId: userOnDB.id,
-                        token: jwt.sign({ userId: userOnDB.id }, process.env.TOKEN_SECRET_WORD, { expiresIn: '24h' }),
+                        token: jwt.sign({ userEmail: userOnDB.email }, process.env.TOKEN_SECRET_WORD, { expiresIn: '24h' }),
                     });
                 }
             })

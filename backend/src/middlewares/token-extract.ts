@@ -8,9 +8,9 @@ module.exports = (request, response, next) => {
     try {
         const token = request.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET_WORD);
-        const userId = decodedToken.userId;
+        const userEmail = decodedToken.userEmail;
         request.auth = {
-            userId: userId,
+            userEmail: userEmail,
         };
         next();
     } catch (error) {

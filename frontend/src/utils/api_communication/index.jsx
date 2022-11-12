@@ -70,3 +70,19 @@ export async function getAllPizzas(token, setPizzas) {
         alert(error.response.data.message);
     }
 }
+
+export async function uploadPizza(token, setPizzas, name, price, imageURL, ingredients) {
+    try {
+        const result = await communicateWithAPI('http://localhost:8000/api/pizza', 'POST', token, {
+            name,
+            price,
+            imageURL,
+            ingredients,
+        });
+        setPizzas((prev) => {
+            return [...prev, result.data];
+        });
+    } catch (error) {
+        alert(error.response.data.message);
+    }
+}
