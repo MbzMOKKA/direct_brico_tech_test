@@ -3,13 +3,20 @@ import defaultPizzaPreview from '../../assets/default_pizza_preview.png';
 import { StyledCard, StyledImage, StyledInfos } from './style';
 
 //Component
-function PizzaCard({ pizza }) {
+function PizzaCard({ index, pizza, setSelectedPizza }) {
     const preview = pizza.imageURL === 'null' ? defaultPizzaPreview : pizza.imageURL;
     const price = pizza.price / 100;
+    const selectPizza = () => {
+        setSelectedPizza(index);
+    };
 
     //Render
     return (
-        <StyledCard>
+        <StyledCard
+            onClick={() => {
+                selectPizza();
+            }}
+        >
             <StyledImage>
                 <img src={preview} alt="Illustration de cette pizza" />
             </StyledImage>

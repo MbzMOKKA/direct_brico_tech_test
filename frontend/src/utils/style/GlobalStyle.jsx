@@ -79,17 +79,11 @@ const StyledGlobalStyle = createGlobalStyle`
         resize: none;
     }
     .price{
-        position: absolute;
-        top: 6px;
-        right: 6px;
         font-weight: bold;
     }
     .ingredients{
         font-style:italic;
         font-size: 16px;
-        text-overflow: ellipsis;
-        overflow: hidden; 
-        white-space: nowrap;
     }
 `;
 

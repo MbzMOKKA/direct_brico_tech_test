@@ -49,4 +49,14 @@ export const StyledInfos = styled.div`
     h3 {
         padding-right: 54px;
     }
+    .price {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+    .ingredients {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 `;
