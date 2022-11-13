@@ -1,11 +1,14 @@
 //Imports
-import { useRef } from 'react';
-import { StyledContainer, StyledPopup, StyledHalfLeft, StyledHalfRight, StyledPreview, StyledActions } from './style';
 import defaultPizzaPreview from '../../assets/default_pizza_preview.png';
+import { useRef, useContext } from 'react';
+import { StyledContainer, StyledPopup, StyledHalfLeft, StyledHalfRight, StyledPreview, StyledActions } from './style';
+import { deletePizza, modifyPizza } from '../../utils/api_communication/index';
 import { useClickOutside } from '../../utils/hooks/index';
+import { SessionContext } from '../../utils/context/index';
 
 //Component
-function PizzaDetails({ pizza, setSelectedPizza }) {
+function PizzaDetails({ pizza, setSelectedPizza, setPizzas }) {
+    const { token } = useContext(SessionContext);
     const preview = pizza.imageURL === 'null' ? defaultPizzaPreview : pizza.imageURL;
     const price = pizza.price / 100;
     const refPopup = useRef();
@@ -34,7 +37,13 @@ function PizzaDetails({ pizza, setSelectedPizza }) {
                     </p>
                     <StyledActions>
                         <button onClick={() => {}}>MODIFIER</button>
-                        <button onClick={() => {}}>SUPPRIMER</button>
+                        <button
+                            onClick={() => {
+                                deletePizza(token, setPizzas, setSelectedPizza, pizza.id);
+                            }}
+                        >
+                            SUPPRIMER
+                        </button>
                         <button onClick={onClickOutside}>RETOUR</button>
                     </StyledActions>
                 </StyledHalfRight>

@@ -16,7 +16,7 @@ const registerFieldsAreValid = (email, password, name, surname) => {
     }
     //Password must be a string, 8+ characters long, contains a number, a symbol, an uppercase character and a lowercase character
     const regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*.,?])/;
-    if (typeof password != 'string' || password.length < 9 || password.match(regexPassword) == null) {
+    if (typeof password != 'string' || password.length < 8 || password.match(regexPassword) == null) {
         return false;
     }
     //Name must be a non empty string

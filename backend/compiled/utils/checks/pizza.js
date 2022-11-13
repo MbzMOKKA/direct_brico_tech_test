@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pizzaFieldsAreValid = void 0;
+exports.userOwnsPizza = exports.pizzaFieldsAreValid = void 0;
+//Imports
+const pizza_1 = require("../../models/pizza");
 //Exports
 const pizzaFieldsAreValid = (name, imageURL, price, ingredients) => {
     //Name must be a non empty string
@@ -22,3 +24,12 @@ const pizzaFieldsAreValid = (name, imageURL, price, ingredients) => {
     return true;
 };
 exports.pizzaFieldsAreValid = pizzaFieldsAreValid;
+const userOwnsPizza = (userEmail, pizzaId) => {
+    for (let i in pizza_1.pizzas) {
+        if (pizza_1.pizzas[i].uploaderEmail == userEmail) {
+            return true;
+        }
+    }
+    return false;
+};
+exports.userOwnsPizza = userOwnsPizza;

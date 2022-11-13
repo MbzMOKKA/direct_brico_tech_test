@@ -21,3 +21,12 @@ export const pizzaFieldsAreValid = (name, imageURL, price, ingredients) => {
     }
     return true;
 };
+
+export const userOwnsPizza = (userEmail, pizzaId) => {
+    for (let i in pizzas) {
+        if (pizzas[i].uploaderEmail == userEmail) {
+            return true;
+        }
+    }
+    return false;
+};

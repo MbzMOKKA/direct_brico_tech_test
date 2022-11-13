@@ -24,3 +24,6 @@
     - Ouvrir un nouveau terminal
     - Executer la commande suivante dans le dossier "direct_brico_tech_test/frontend" : npm run start
     - Attendre quelques secondes jusqu'à la fin de la compilation : un nouvel onglet à l'adresse "http://localhost:3000" sera ouvert dans votre navigateur par défaut et un message de réussite apparaitra dans le terminal
+    - Un compte par défaut est directement utilisable
+        Adresse email : test@gmail.com
+        Mot de passe : abc123D?

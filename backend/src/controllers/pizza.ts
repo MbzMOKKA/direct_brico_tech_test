@@ -8,8 +8,10 @@ import { pizzas } from '../models/pizza';
 
 //Exports
 export const getAllPizzas = (request, response, next) => {
+    console.log(pizzas);
     response.status(200).json(pizzas);
 };
+
 export const uploadPizza = (request, response, next) => {
     try {
         //Checking if the user behind the request exists
@@ -27,7 +29,7 @@ export const uploadPizza = (request, response, next) => {
         }
         //Creating the uploaded pizza
         const pizza = {
-            id: pizzas.length,
+            id: misc.generateId(pizzas),
             uploaderEmail: request.auth.userEmail,
             name: pizzaName,
             price: Math.round(pizzaPrice * 100),
@@ -41,35 +43,32 @@ export const uploadPizza = (request, response, next) => {
         errorFunctions.sendServerError(response, error);
     }
 };
+
 export const modifyPizza = (request, response, next) => {};
-export const deletePizza = (request, response, next) => {};
+
+export const deletePizza = (request, response, next) => {
+    try {
+        //Checking if the user behind the request exists
+        const userOnDB = checkUser.onDBfromEmail(request.auth.userEmail);
+        if (userOnDB === undefined) {
+            throw "Jeton d'authentification incorrect";
+        }
+        const pizzaId = request.params.id;
+        //Checking if the remover owns the pizza
+        if (!checkPizza.userOwnsPizza(request.auth.userEmail, pizzaId)) {
+            throw 'Vous ne pouvez pas supprimer une pizza qui ne vous appartiens pas';
+        }
+        //Removing the pizza from the data base
+        if (!misc.removeFromDatabase(pizzaId, pizzas)) {
+            throw 'Cette pizza est inexistante';
+        }
+        successFunctions.sendDeleteSuccess(response);
+    } catch (error) {
+        errorFunctions.sendServerError(response, error);
+    }
+};
 /*
 
-exports.uploadSauce = (request, response, next) => {
-    //Building the sauce to upload to the data base
-    const sauceObject = JSON.parse(request.body.sauce);
-    delete sauceObject._id;
-    delete sauceObject._userId;
-    const sauceToUpload = new Sauce({
-        ...sauceObject,
-        userId: request.auth.userId,
-        imageUrl: `${request.protocol}://${request.get('host')}/images/${request.file.filename}`,
-        likes: 0,
-        dislikes: 0,
-        usersLiked: [],
-        usersDisliked: [],
-    });
-    //Uploading the sauce to the data base
-    sauceToUpload
-        .save()
-        .then(() => successFunctions.sendUploadSuccess(response))
-        .catch((error) => {
-            //Deleting the images that was created if an error occured
-            fileSystem.unlink(`images/${request.file.filename}`, () => {
-                errorFunctions.sendBadRequestError(response, error);
-            });
-        });
-};
 
 exports.modifySauce = (request, response, next) => {
     const sauceId = request.params.id;

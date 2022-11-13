@@ -86,3 +86,15 @@ export async function uploadPizza(token, setPizzas, name, price, imageURL, ingre
         alert(error.response.data.message);
     }
 }
+
+export async function deletePizza(token, setPizzas, setSelectedPizza, pizzaId) {
+    try {
+        const result = await communicateWithAPI(`http://localhost:8000/api/pizza/${pizzaId}`, 'DELETE', token, null);
+        if (result.status === 200) {
+            setSelectedPizza(-1);
+            getAllPizzas(token, setPizzas);
+        }
+    } catch (error) {
+        alert(error.response.data.message);
+    }
+}

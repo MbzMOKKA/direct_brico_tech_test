@@ -25,7 +25,7 @@ export const register = (request, response, next) => {
             .then((hash) => {
                 //Hashed password created, creating the user
                 const user = {
-                    id: users.length,
+                    id: misc.generateId(users),
                     email: request.body.email,
                     password: hash,
                     name: request.body.name,
@@ -42,6 +42,7 @@ export const register = (request, response, next) => {
         errorFunctions.sendServerError(response, error);
     }
 };
+
 export const logIn = (request, response, next) => {
     try {
         //Looking if the user exists

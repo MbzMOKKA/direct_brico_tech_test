@@ -1,6 +1,6 @@
 //Imports
 import styled from 'styled-components';
-import colors from '../../utils/style/colors';
+import { animPopupAppear } from '../../utils/style/animation';
 
 //Exports
 export const StyledContainer = styled.div`
@@ -16,6 +16,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledPopup = styled.div`
+    animation: ${animPopupAppear} 400ms ease-out;
     background-color: white;
     box-shadow: 0px 2px 48px gray;
     border-radius: 25px;

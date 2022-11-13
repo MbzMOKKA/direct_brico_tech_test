@@ -26,7 +26,7 @@ const register = (request, response, next) => {
             .then((hash) => {
             //Hashed password created, creating the user
             const user = {
-                id: user_1.users.length,
+                id: misc.generateId(user_1.users),
                 email: request.body.email,
                 password: hash,
                 name: request.body.name,
