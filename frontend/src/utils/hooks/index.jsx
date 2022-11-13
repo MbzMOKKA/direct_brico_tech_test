@@ -1,12 +1,5 @@
 import { useRef, useEffect } from 'react';
 
-/*
-const elementRef = useRef();
-const onClickOutside = ()=>{
-    console.log('Clicked outside of element');
-}
-useClickOutside(elementRef, onClickOutside);
-*/
 //Execute the callback if the user click outside of the elementRef
 export function useClickOutside(elementRef, callback) {
     const callbackRef = useRef();
