@@ -30,3 +30,18 @@ export const removeFromDatabase = (elementId, dbArray) => {
     }
     return false;
 };
+
+export const modifyOnDatabase = (newElement, dbArray) => {
+    let index = -1;
+    for (let i in dbArray) {
+        if (dbArray[i].id == newElement.id) {
+            index = Number(i);
+            break;
+        }
+    }
+    if (index > -1) {
+        dbArray[index] = newElement;
+        return true;
+    }
+    return false;
+};

@@ -5,12 +5,11 @@ import colors from '../../utils/style/colors';
 //Exports
 export const StyledForm = styled.form`
     background-color: ${colors.backgroundDarker};
-    border-radius: 25px;
-    margin-top: 30px;
+    width: 100%;
     padding-left: 20%;
     padding-right: 20%;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     display: flex;
     flex-direction: column;
     button {
@@ -26,4 +25,12 @@ export const StyleImagePreview = styled.img`
     width: 20%;
     border-radius: 10px;
     margin-bottom: 20px;
+`;
+
+export const StyledButtons = styled.div`
+    display: flex;
+    button {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 `;

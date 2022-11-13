@@ -98,3 +98,19 @@ export async function deletePizza(token, setPizzas, setSelectedPizza, pizzaId) {
         alert(error.response.data.message);
     }
 }
+
+export async function modifyPizza(token, setPizzas, pizzaId, name, price, imageURL, ingredients) {
+    try {
+        const result = await communicateWithAPI(`http://localhost:8000/api/pizza/${pizzaId}`, 'PUT', token, {
+            name,
+            price,
+            imageURL,
+            ingredients,
+        });
+        if (result.status === 200) {
+            getAllPizzas(token, setPizzas);
+        }
+    } catch (error) {
+        alert(error.response.data.message);
+    }
+}

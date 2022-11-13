@@ -22,7 +22,7 @@ export const StyledPopup = styled.div`
     border-radius: 25px;
     display: flex;
     width: 60%;
-    height: 50%;
+    height: 60%;
     overflow: hidden;
 `;
 

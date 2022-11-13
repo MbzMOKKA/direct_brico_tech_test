@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeFromDatabase = exports.addToDatabase = exports.generateId = void 0;
+exports.modifyOnDatabase = exports.removeFromDatabase = exports.addToDatabase = exports.generateId = void 0;
 const generateId = (dbArray) => {
     if (dbArray.length > 0) {
         const lastElement = dbArray[dbArray.length - 1];
@@ -30,3 +30,18 @@ const removeFromDatabase = (elementId, dbArray) => {
     return false;
 };
 exports.removeFromDatabase = removeFromDatabase;
+const modifyOnDatabase = (newElement, dbArray) => {
+    let index = -1;
+    for (let i in dbArray) {
+        if (dbArray[i].id == newElement.id) {
+            index = Number(i);
+            break;
+        }
+    }
+    if (index > -1) {
+        dbArray[index] = newElement;
+        return true;
+    }
+    return false;
+};
+exports.modifyOnDatabase = modifyOnDatabase;

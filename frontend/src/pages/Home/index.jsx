@@ -30,13 +30,6 @@ function Home() {
             <h2>Ajouter une pizza</h2>
             <PizzaUploader token={token} setPizzas={setPizzas} />
             {selectedPizza !== -1 ? <PizzaDetails pizza={pizzas[selectedPizza]} setSelectedPizza={setSelectedPizza} setPizzas={setPizzas} /> : null}
-            <button
-                onClick={() => {
-                    getAllPizzas(token, setPizzas);
-                }}
-            >
-                REFRESH
-            </button>
         </StyledHome>
     );
 }
